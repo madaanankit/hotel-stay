@@ -1,0 +1,1 @@
+Minimal API project for HotelStay. Created with `dotnet new webapi -minimal -o HotelStay.Api` targeting net10.0.

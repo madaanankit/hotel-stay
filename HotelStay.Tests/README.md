@@ -1,0 +1,1 @@
+xUnit tests for HotelStay.Api. Created with `dotnet new xunit -o HotelStay.Tests` targeting net10.0.

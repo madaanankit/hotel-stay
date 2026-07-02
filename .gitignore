@@ -1,0 +1,36 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build
+bin/
+obj/
+
+# NuGet
+*.nupkg
+packages/
+
+# Rider
+.idea/
+
+# dotnet
+project.lock.json
+project.fragment.lock.json
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Node
+node_modules/
+dist/
+.env
+
+# Logs
+*.log
+
+# Mac
+.DS_Store
+
+# Others
+*.userprefs

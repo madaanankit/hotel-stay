@@ -1,0 +1,23 @@
+Run these commands from the repository root to create the projects:
+
+mkdir hotel-stay
+cd hotel-stay
+
+dotnet new sln -n HotelStay
+
+dotnet new webapi -minimal -o HotelStay.Api -f net10.0
+
+dotnet new xunit -o HotelStay.Tests -f net10.0
+
+cd HotelStay.Tests
+
+dotnet add reference ../HotelStay.Api/HotelStay.Api.csproj
+
+cd ..
+
+dotnet sln add HotelStay.Api/HotelStay.Api.csproj
+
+dotnet sln add HotelStay.Tests/HotelStay.Tests.csproj
+
+# Build
+# dotnet build HotelStay.sln
