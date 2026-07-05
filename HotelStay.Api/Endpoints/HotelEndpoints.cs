@@ -55,18 +55,18 @@ namespace HotelStay.Api.Endpoints
         public static void MapHotelEndpoints(this WebApplication app)
         {
             // Thin endpoint mapping: handlers will be refactored into dedicated classes.
-            app.MapGet("/hotels/search", (Func<string?, string?, string?, string?, HotelSearchService, HttpContext, Task<IResult>>) SearchHandler)
+            app.MapGet("/hotels/search", (Func<string?, string?, string?, string?, HotelSearchService, HttpContext, ILoggerFactory, Task<IResult>>) HotelStay.Api.Endpoints.Handlers.SearchHandler.Handle)
                 .WithName("SearchHotels")
                 .Produces(StatusCodes.Status200OK)
                 .ProducesProblem(StatusCodes.Status400BadRequest);
 
-            app.MapPost("/hotels/reserve", (Func<HttpRequest, ReservationStore, Task<IResult>>) ReserveHandler)
+            app.MapPost("/hotels/reserve", (Func<HttpRequest, ReservationStore, ILoggerFactory, Task<IResult>>) HotelStay.Api.Endpoints.Handlers.ReserveHandler.Handle)
                 .WithName("ReserveHotel")
                 .Produces(StatusCodes.Status201Created)
                 .ProducesProblem(StatusCodes.Status400BadRequest)
                 .Produces(StatusCodes.Status422UnprocessableEntity);
 
-            app.MapGet("/hotels/reservation/{reference}", (Func<string, ReservationStore, HttpContext, Task<IResult>>)GetReservationHandler)
+            app.MapGet("/hotels/reservation/{reference}", (Func<string, ReservationStore, HttpContext, ILoggerFactory, Task<IResult>>)HotelStay.Api.Endpoints.Handlers.GetReservationHandler.Handle)
                 .WithName("GetReservation")
                 .Produces(StatusCodes.Status200OK)
                 .ProducesProblem(StatusCodes.Status400BadRequest)
