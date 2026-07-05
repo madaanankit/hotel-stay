@@ -25,6 +25,12 @@ Run unit tests for the API project:
 
    dotnet test HotelStay.Tests
 
+Run tests with coverage collection (requires coverlet collector package):
+
+   dotnet test HotelStay.Tests --collect:"XPlat Code Coverage"
+
+After running the above command, the coverage report will be available under the test results folder (use coverage tools or CI to publish a badge).
+
 Run the UI (hotelstay-ui)
 -------------------------
 The static UI files are located in `hotelstay-ui/`:
