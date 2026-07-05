@@ -21,9 +21,12 @@ builder.Services.AddEndpointsApiExplorer();
 // Enable CORS so the plain static UI (served from file:// or a simple static server)
 // can call the API during development. This policy allows any origin, method, and header.
 // It's intentionally permissive for local development; tighten in production as needed.
+// Configure CORS from configuration. In Development we enable a permissive policy
+// controlled via appsettings.Development.json. In non-development environments no CORS policy is applied.
+var corsOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? new[] { "http://localhost:8000" };
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+    options.AddPolicy("LocalDevCors", policy => policy.WithOrigins(corsOrigins).AllowAnyMethod().AllowAnyHeader());
 });
 
 // Register HotelSearchService which orchestrates querying providers and aggregation.
@@ -55,8 +58,11 @@ app.Use(async (context, next) =>
 // Ensure routing is established before applying CORS and mapping endpoints
 app.UseRouting();
 
-// Apply CORS policy globally
-app.UseCors("AllowAll");
+// Apply CORS policy only in Development to avoid wide-open CORS in non-dev environments
+if (app.Environment.IsDevelopment())
+{
+    app.UseCors("LocalDevCors");
+}
 
 app.MapHotelEndpoints();
 
