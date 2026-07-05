@@ -19,8 +19,9 @@ This file documents what I would change or improve given more time, and where I 
 	 - Impact: use a lightweight SQL store (SQLite for demos, PostgreSQL for production) with migrations, ensuring reservations survive process restarts and enabling real integration tests.
 
 - AI assistance and verification
-  - I used an AI assistant to scaffold the static UI and help with iterative fixes. AI accelerated development but introduced a few assumptions (payload shapes, enum vs string) that required manual correction and additional tests.
-  - I validated AI outputs using unit and integration tests and by running the app end-to-end; remaining areas for manual review are noted in this repo.
+  - I used GitHub Copilot (GitHub Copilot Chat) integrated in Visual Studio / Cursor to scaffold the static UI and help with iterative fixes. AI accelerated development but introduced a few assumptions (payload shapes, enum vs string) that required manual correction and additional tests.
+  - I validated AI outputs using unit and integration tests and by running the app end-to-end. Areas where AI required manual correction (JSON serialization, ID generation, CORS policy) are documented in commit messages and code comments.
+  - Design-phase prompts were used to inform architecture decisions and identify gaps in test coverage and production readiness.
 
 - Final notes
   - The project is a functional prototype and a good foundation. With the three investments above (modern UI framework, OpenAPI, persistent storage) plus improved testing and observability, the solution would be ready for early staging and wider evaluation.
