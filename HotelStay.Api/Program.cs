@@ -45,7 +45,8 @@ app.Use(async (context, next) =>
     catch (Exception ex)
     {
         // Log the exception for test output but re-throw so the host's exception handling can decide how to render it.
-        Console.Error.WriteLine("Unhandled middleware exception: " + ex.ToString());
+        var logger = context.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger("UnhandledExceptionMiddleware");
+        logger.LogError(ex, "Unhandled middleware exception");
         throw;
     }
 });
