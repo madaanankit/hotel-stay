@@ -1,0 +1,1 @@
+Placeholder for frontend (Angular/React/plain HTML).

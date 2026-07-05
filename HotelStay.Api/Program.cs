@@ -8,6 +8,9 @@ using HotelStay.Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Bind to all network interfaces on port 5000
+builder.WebHost.UseUrls("http://0.0.0.0:5000");
+
 // Register provider implementations.
 // These providers are stateless, in-memory stubs. Singleton lifetime is appropriate because:
 // - There is no per-request state stored on the provider instances.
@@ -55,15 +58,18 @@ app.Use(async (context, next) =>
 // when running under test hosts. Enable in local development by adding Swashbuckle and
 // calling UseSwagger/UseSwaggerUI here if desired.
 
-// Map endpoints defined in a dedicated file to keep Program.cs thin.
-// Ensure routing is established before applying CORS and mapping endpoints
-app.UseRouting();
-
 // Apply CORS policy only in Development to avoid wide-open CORS in non-dev environments
 if (app.Environment.IsDevelopment())
 {
     app.UseCors("LocalDevCors");
 }
+
+// Serve static files (UI) from the hotelstay-ui directory
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+// Map endpoints defined in a dedicated file to keep Program.cs thin.
+app.UseRouting();
 
 app.MapHotelEndpoints();
 
