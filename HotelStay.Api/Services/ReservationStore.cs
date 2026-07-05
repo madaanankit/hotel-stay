@@ -11,8 +11,14 @@ namespace HotelStay.Api.Services
     {
         private readonly ConcurrentDictionary<string, ReservationConfirmation> _store = new();
 
-        public bool TryAdd(string id, ReservationConfirmation confirmation) => _store.TryAdd(id, confirmation);
+        public bool TryAdd(string id, ReservationConfirmation confirmation)
+        {
+            return _store.TryAdd(id, confirmation);
+        }
 
-        public bool TryGet(string id, out ReservationConfirmation? confirmation) => _store.TryGetValue(id, out confirmation);
+        public bool TryGet(string id, out ReservationConfirmation? confirmation)
+        {
+            return _store.TryGetValue(id, out confirmation);
+        }
     }
 }
